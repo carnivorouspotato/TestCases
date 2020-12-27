@@ -17,7 +17,7 @@ WebDriver driver;
        acctCreation.teacherRoleSelection();
        acctCreation.teacherReadingLevel();
        acctCreation.loggedInLandingPage();
-
+       acctCreation.profileLandingPage();
 
     }
 

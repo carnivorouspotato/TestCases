@@ -65,14 +65,29 @@ public class BasePage {
         System.out.println(findElementUsingFluentWait(locator).getText());
     }
 
-    public void loopToClickElements(By locator) {
+    public void loopToClickElements(By locator) throws InterruptedException {
         /**I had to use this loop as li contents of the Ul where dynamic and had no static attributes to follow xpath.*/
       List<WebElement> testList = findElementUsingFluentWait(locator).findElements(By.tagName("li"));
         for (int i = 0; i < testList.size(); i++){
        WebElement clickTopOfList = testList.get(0);
+
        clickTopOfList.click();
        break;
        }
+
+
+    }
+
+
+    public void loopToClickElementsForSearchBySchool(By locator) throws InterruptedException {
+        /**I had to use this loop as li contents of the Ul where dynamic and had no static attributes to follow xpath.*/
+        List<WebElement> testList = findElementUsingFluentWait(locator).findElements(By.tagName("li"));
+        for (int i = 0; i < testList.size(); i++){
+            WebElement clickTopOfList = testList.get(1);
+
+            clickTopOfList.click();
+            break;
+        }
 
 
     }
