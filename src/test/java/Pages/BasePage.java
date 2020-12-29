@@ -3,6 +3,7 @@ package Pages;
 import DriverWrapper.Web;
 import com.google.common.base.Function;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 
 import java.time.Duration;
@@ -37,12 +38,6 @@ public class BasePage {
     }
 
 
-    public void elementCreat(By locator) {
-        WebElement creationOfElement = (WebElement) locator;
-        List<WebElement> elementForLoop = creationOfElement.findElements(By.tagName("li"));
-    }
-
-
     public void type(By locator, String data) {
         findElementUsingFluentWait(locator).sendKeys(data);
     }
@@ -67,23 +62,9 @@ public class BasePage {
 
     public void loopToClickElements(By locator) throws InterruptedException {
         /**I had to use this loop as li contents of the Ul where dynamic and had no static attributes to follow xpath.*/
-      List<WebElement> testList = findElementUsingFluentWait(locator).findElements(By.tagName("li"));
-        for (int i = 0; i < testList.size(); i++){
-       WebElement clickTopOfList = testList.get(0);
-
-       clickTopOfList.click();
-       break;
-       }
-
-
-    }
-
-
-    public void loopToClickElementsForSearchBySchool(By locator) throws InterruptedException {
-        /**I had to use this loop as li contents of the Ul where dynamic and had no static attributes to follow xpath.*/
         List<WebElement> testList = findElementUsingFluentWait(locator).findElements(By.tagName("li"));
-        for (int i = 0; i < testList.size(); i++){
-            WebElement clickTopOfList = testList.get(1);
+        for (int i = 0; i < testList.size(); i++) {
+            WebElement clickTopOfList = testList.get(0);
 
             clickTopOfList.click();
             break;
@@ -93,24 +74,43 @@ public class BasePage {
     }
 
 
+    public void loopToClickElementsForSearchBySchool(By locator) throws InterruptedException {
+        /**I had to use this loop as li contents of the Ul where dynamic and had no static attributes to follow xpath.*/
+        List<WebElement> testList = findElementUsingFluentWait(locator).findElements(By.tagName("li"));
+        for (int i = 0; i < testList.size(); i++) {
+            WebElement clickTopOfList = testList.get(1);
+
+            clickTopOfList.click();
+            break;
+        }
 
 
+    }
 
-
-
-    /**
-     * select any value form any dropdown (locator, String)
-     *
-     * WebElement date = driver.findElement(By.id("month"));
-     * Select dateDropdown = new Select(date);
-     * dateDropdown.selectByVisibleText("Feb");
-     *
-     */
-    public void selectFromDropdownUsingVisibleText(By locator, String data) {
-        WebElement dropdownElement = findElementUsingFluentWait(locator);
-        Select dropdown = new Select(dropdownElement);
-        dropdown.selectByVisibleText(data);
+            public void hoverOverElement (By locator){
+            Actions action = new Actions(Web.getDriver());
+            action.moveToElement(findElementUsingFluentWait(locator)).perform();
     }
 
 
-}
+
+
+
+        /**
+         * select any value form any dropdown (locator, String)
+         *
+         * WebElement date = driver.findElement(By.id("month"));
+         * Select dateDropdown = new Select(date);
+         * dateDropdown.selectByVisibleText("Feb");
+         *
+         */
+
+        /** public void selectFromDropdownUsingVisibleText(By locator, String data) {
+         WebElement dropdownElement = findElementUsingFluentWait(locator);
+         Select dropdown = new Select(dropdownElement);
+         dropdown.selectByVisibleText(data);
+         }*/
+
+
+    }
+
